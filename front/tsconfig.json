@@ -1,0 +1,22 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+    "jsx": "react-jsx", // React JSX를 사용하기 위해 추가
+    "allowSyntheticDefaultImports": true, // React 기본 가져오기 관련 오류 해결
+    "strict": true, // TypeScript의 엄격 모드 활성화
+    "esModuleInterop": true, // ES6 모듈과의 호환성
+    "target": "ES6", // 코드 출력 대상
+    "moduleResolution": "node", // 모듈 해석 방식
+    "lib": ["dom", "dom.iterable", "esnext"], // 브라우저 관련 객체와 최신 JS 기능 사용
+    "skipLibCheck": true // 외부 라이브러리 타입 검사 건너뜀
+
+  }
+}

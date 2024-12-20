@@ -1,0 +1,38 @@
+package com.application.Controller;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/status")
+public class MainController {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public MainController(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @GetMapping("/check")
+    public Map<String, String> check() {
+        Map<String, String> status = new HashMap<>();
+        status.put("server", "up");
+
+        // 데이터베이스 연결 상태 확인
+        try {
+            jdbcTemplate.execute("SELECT 1");
+            status.put("database", "up");
+        } catch (Exception e) {
+            status.put("database", "down");
+        }
+
+        return status;
+    }
+}
